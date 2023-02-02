@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT || 3000;
+const authRouter = require('./routes/auth.router')
 // import db from './models';
 // import { users } from './seeders/users';
 
@@ -15,8 +16,12 @@ const port = process.env.PORT || 3000;
 // createUsers()
 
 // db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-      console.log(`Magic happening on port ${port}`)
-    })
-  // }
-// )
+//   app.listen(port, () => {
+//     console.log(`Magic happening on port ${port}`)
+//   })
+// }
+
+app.use("/api/v1/auth", authRouter);
+app.listen(port, () => {
+  console.log(`Magic happening on port ${port}`)
+})
