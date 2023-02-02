@@ -1,9 +1,17 @@
 const express = require('express');
+const cors = require("cors");
 require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT || 3000;
 const authRouter = require('./routes/auth.router')
+
+app.use(cors(
+  {
+    origin: ['https://json-statham.com', 'http://localhost:3000'],
+    credentials: true
+  }
+));
 // import db from './models';
 // import { users } from './seeders/users';
 
