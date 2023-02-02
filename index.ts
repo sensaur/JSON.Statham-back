@@ -8,7 +8,10 @@ const authRouter = require('./routes/auth.router')
 app.use(express.json());
 app.use(cors(
   {
-    origin: ['https://json-statham.com', 'http://localhost:3000'],
+    // origin: ['http://localhost:3000'],
+    origin: ['https://json-statham.com'],
+    // origin: ['https://json-statham.com', 'http://localhost:3000'],
+    // origin: '*',
     credentials: true
   }
 ));
