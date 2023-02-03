@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
-const {User} = require("../models/user");
+// const {User} = require("../models/user");
+import db from "../models"
+
 require('dotenv').config()
 
 const signUp = async (req: any, res: any) => {
@@ -29,16 +31,37 @@ const signUp = async (req: any, res: any) => {
     //     return res.sendStatus(500);
     //   }
     // }
-  }
-  catch (error: any) {
+  } catch (error: any) {
     console.log(error.name)
   }
   return res.sendStatus(400);
 };
 
 const signIn = async (req: any, res: any) => {
-  console.log("456", req.body)
-  return res.sendStatus(200);
+  const {password, email} = req.body;
+  console.log("password", password)
+  console.log("email", email)
+  if (password && email) {
+    try {
+      const currentUser = await db.User.findOne({where: {email}});
+      console.log("currentUser", currentUser)
+      if (
+        currentUser &&
+        (await bcrypt.compare(password, currentUser.password))
+      ) {
+        req.session.user = {
+          id: currentUser.id,
+          userName: currentUser.userName,
+        };
+        return res.json({id: currentUser.id, name: currentUser.userName});
+      }
+      return setTimeout(() => res.sendStatus(401), 1e3);
+    } catch (error) {
+      console.log(error)
+      return setTimeout(() => res.sendStatus(500), 1e3);
+    }
+  }
+  return res.sendStatus(400);
 };
 
 

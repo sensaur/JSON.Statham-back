@@ -1,11 +1,14 @@
 'use strict';
-const {
+// const {
+//   Model
+// } = require('sequelize');
+
+import {
   Model
-} = require('sequelize');
+} from 'sequelize';
 
 interface UserAttributes {
-  id: number;
-  name: string;
+  userName: string;
   email: string;
   password: string;
 }
@@ -13,8 +16,7 @@ interface UserAttributes {
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model <UserAttributes>
     implements UserAttributes {
-    id!: number;
-    name!: string;
+    userName!: string;
     email!: string;
     password!: string;
 
@@ -23,12 +25,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
 
   User.init({
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    name: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

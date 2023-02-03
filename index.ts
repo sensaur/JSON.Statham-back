@@ -1,14 +1,12 @@
-const express = require('express');
-const cors = require("cors");
 require('dotenv').config()
-
-const app = express()
+const {PORT, COOKIE_SECRET, COOKIE_NAME, secretKey} = process.env;
+const express = require('express');
 const session = require("express-session");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
-const port = process.env.PORT
-const {COOKIE_SECRET, COOKIE_NAME} = process.env;
+const cors = require("cors");
+const app = express()
 const authRouter = require('./routes/auth.router')
 app.set("cookieName", COOKIE_NAME);
 app.use(express.json());
@@ -18,6 +16,7 @@ app.use(cors(
     credentials: true
   }
 ));
+
 app.use(
   session({
     name: app.get("cookieName"),
@@ -37,6 +36,7 @@ app.use(
 );
 
 app.use("/api/v1/auth", authRouter);
-app.listen(port, () => {
-  console.log(`Magic happening on port ${port}`)
+
+app.listen(PORT, () => {
+  console.log(`Magic happening on port ${PORT}`)
 })
