@@ -37,7 +37,7 @@ const signUp = async (req: any, res: any) => {
 };
 
 const signIn = async (req: any, res: any) => {
-  console.log("456", req.body.email)
+  console.log("456", req.body)
   return res.sendStatus(200);
 };
 

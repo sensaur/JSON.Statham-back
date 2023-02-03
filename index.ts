@@ -11,6 +11,7 @@ const port = process.env.PORT
 const {COOKIE_SECRET, COOKIE_NAME} = process.env;
 const authRouter = require('./routes/auth.router')
 app.set("cookieName", COOKIE_NAME);
+app.use(express.json());
 app.use(cors(
   {
     origin: ['https://json-statham.com', 'http://localhost:3000'],
