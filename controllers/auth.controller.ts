@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
-// const {User} = require("../models/user");
+// import User from "../models/";
 import db from "../models"
+// const db = require('/models')
 
 require('dotenv').config()
 
@@ -44,6 +45,7 @@ const signIn = async (req: any, res: any) => {
   if (password && email) {
     try {
       const currentUser = await db.User.findOne({where: {email}});
+      // const currentUser = await User.findOne({where: {email}});
       console.log("currentUser", currentUser.dataValues)
       if (
         currentUser &&
