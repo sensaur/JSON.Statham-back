@@ -7,31 +7,33 @@ require('dotenv').config()
 
 const signUp = async (req: any, res: any) => {
   try {
-    console.log("123", req.body.email)
-    // const {userName, password, email, role, isAdmin, userBankId} = req.body;
-    // if (userName && password && email) {
-    //   try {
-    //     const hashPassword = await bcrypt.hash(password, process.env.saltRounds);
-    //     const newUser = await User.create(
-    //       {
-    //         userName,
-    //         password: hashPassword,
-    //         email,
-    //         isAdmin,
-    //         role,
-    //         user_bank_id: userBankId
-    //       },
-    //       {
-    //         returning: true,
-    //         plain: true,
-    //       }
-    //     );
-    //     return res.sendStatus(200);
-    //   } catch (error: any) {
-    //     console.log(error.name)
-    //     return res.sendStatus(500);
-    //   }
-    // }
+    // console.log("123", req.body.email)
+    const {password, email, userName} = req.body;
+    // console.log(process.env.saltRounds)
+    // console.log(typeof process.env.saltRounds)
+    // console.log(Number(process.env.saltRounds))
+    // console.log(typeof Number(process.env.saltRounds))
+    if (password && email) {
+      try {
+        const hashPassword = await bcrypt.hash(password, Number(process.env.saltRounds));
+        const newUser = await db.User.create(
+          {
+            password: hashPassword,
+            email,
+            userName,
+          },
+          {
+            returning: true,
+            plain: true,
+          }
+        );
+        return res.json('Пользователь успешно создан')
+        // return res.sendStatus(200);
+      } catch (error: any) {
+        // console.log(error)
+        return res.sendStatus(500);
+      }
+    }
   } catch (error: any) {
     console.log(error.name)
   }
