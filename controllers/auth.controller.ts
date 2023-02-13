@@ -57,7 +57,7 @@ const signIn = async (req: any, res: any) => {
           id: currentUser.id,
           userName: currentUser.userName,
         };
-        return res.json({id: currentUser.id, name: currentUser.userName});
+        return res.json({id: currentUser.id, userName: currentUser.userName, email: currentUser.email});
       }
       return setTimeout(() => res.sendStatus(401), 1e3);
     } catch (error) {

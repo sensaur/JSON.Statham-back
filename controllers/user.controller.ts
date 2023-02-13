@@ -14,5 +14,17 @@ const getAllUsers = async (req: any, res: any) => {
   }
 }
 
+const editUser = async (req: any, res: any) => {
+  const {userName, email, id} = req.body
+  try {
+    const updatedUser = await db.User.findOne({where: {id}});
+    updatedUser.userName = userName;
+    updatedUser.email = email;
+    await updatedUser.save()
+    return res.json("User info updated on server").status(200);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+}
 
-export { getAllUsers }
+export { getAllUsers, editUser }
