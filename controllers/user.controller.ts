@@ -4,7 +4,9 @@ require('dotenv').config()
 
 const getAllUsers = async (req: any, res: any) => {
   try {
-    const allUsers = await db.User.findAll();
+    const allUsers = await db.User.findAll({
+      attributes: ['id', 'userName', 'email'],
+    });
     console.log(allUsers)
     return res.json(allUsers);
   } catch (error) {
