@@ -8,6 +8,7 @@ const redisClient = redis.createClient({url: process.env.REDIS_URL});
 const cors = require("cors");
 const app = express()
 const authRouter = require('./routes/auth.router')
+const userRouter = require('./routes/user.router')
 app.set("cookieName", COOKIE_NAME);
 app.use(express.json());
 app.use(cors(
@@ -36,6 +37,7 @@ app.use(
 );
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`)
