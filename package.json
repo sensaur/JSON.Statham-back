@@ -39,6 +39,7 @@
     "redis": "^3.1.2",
     "sequelize": "^6.28.0",
     "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "uuid": "^9.0.0"
   }
 }

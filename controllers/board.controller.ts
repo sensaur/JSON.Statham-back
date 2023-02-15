@@ -1,4 +1,5 @@
 import db from "../db/models"
+const { v4: uuidv4 } = require('uuid');
 
 require('dotenv').config()
 
@@ -21,6 +22,25 @@ const getAllBoards = async (req: any, res: any) => {
   }
 }
 
+const createBoard = async (req: any, res: any) => {
+  console.log(req.session.user.id)
+  const boardUUID = uuidv4();
+  const {boardTitle, order, color} = req.body;
+  try {
+    const newBoard = await db.Board.create({
+      boardTitle,
+      order,
+      color,
+      user_id: req.session.user.id,
+      boardUUID
+    });
+    return res.json(newBoard);
+  } catch (error) {
+    console.log(error)
+    return res.sendStatus(500);
+  }
+}
+
 const editBoard = async (req: any, res: any) => {
   const {boardTitle} = req.body
   const {id} = req.params
@@ -34,4 +54,16 @@ const editBoard = async (req: any, res: any) => {
   }
 }
 
-export { getAllBoards, editBoard }
+const getBoard = async (req: any, res: any) => {
+  const {id} = req.params
+  try {
+    const board = await db.Board.findOne({where: {boardUUID: id},
+    attributes:['boardTitle', 'boardUUID', 'order' , 'color']});
+    return res.json(board).status(200);
+  } catch (error) {
+    console.log(error)
+    return res.sendStatus(500);
+  }
+}
+
+export { getAllBoards, editBoard, createBoard, getBoard }
