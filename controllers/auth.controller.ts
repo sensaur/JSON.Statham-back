@@ -1,18 +1,11 @@
 const bcrypt = require("bcrypt");
-// import User from "../models/";
-import db from "../models"
-// const db = require('/models')
+import db from "../db/models"
 
 require('dotenv').config()
 
 const signUp = async (req: any, res: any) => {
   try {
-    // console.log("123", req.body.email)
     const {password, email, userName} = req.body;
-    // console.log(process.env.saltRounds)
-    // console.log(typeof process.env.saltRounds)
-    // console.log(Number(process.env.saltRounds))
-    // console.log(typeof Number(process.env.saltRounds))
     if (password && email) {
       try {
         const hashPassword = await bcrypt.hash(password, Number(process.env.saltRounds));
@@ -27,10 +20,9 @@ const signUp = async (req: any, res: any) => {
             plain: true,
           }
         );
+        console.log('newUser=>', newUser)
         return res.json('Пользователь успешно создан')
-        // return res.sendStatus(200);
       } catch (error: any) {
-        // console.log(error)
         return res.sendStatus(500);
       }
     }
@@ -42,12 +34,9 @@ const signUp = async (req: any, res: any) => {
 
 const signIn = async (req: any, res: any) => {
   const {password, email} = req.body;
-  // console.log("password", password)
-  // console.log("email", email)
   if (password && email) {
     try {
       const currentUser = await db.User.findOne({where: {email}});
-      // const currentUser = await User.findOne({where: {email}});
       console.log("currentUser", currentUser.dataValues)
       if (
         currentUser &&

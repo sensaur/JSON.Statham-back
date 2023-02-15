@@ -11,7 +11,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model <BoardAttributes>
     implements BoardAttributes {
     boardTitle!: string;
-    static associate(models: any) {
+    static associate() {
     }
   }
 

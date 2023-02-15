@@ -20,7 +20,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     email!: string;
     password!: string;
 
-    static associate(models: any) {
+    static associate() {
     }
   }
 
