@@ -5,24 +5,31 @@ import {
 
 interface BoardAttributes {
   boardTitle: string;
+  boardUUID: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class User extends Model <BoardAttributes>
+  class Board extends Model <BoardAttributes>
     implements BoardAttributes {
     boardTitle!: string;
-    static associate() {
+    boardUUID!: string;
+    static associate({User}: any) {
+      this.belongsTo(User, { foreignKey: "user_id" });
     }
   }
 
-  User.init({
+  Board.init({
     boardTitle: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    boardUUID: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
   }, {
     sequelize,
     modelName: 'Board',
   });
-  return User;
+  return Board;
 };

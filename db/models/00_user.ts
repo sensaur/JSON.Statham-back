@@ -1,14 +1,11 @@
 'use strict';
-// const {
-//   Model
-// } = require('sequelize');
-
 import {
   Model
 } from 'sequelize';
 
 interface UserAttributes {
   userName: string;
+  userUUID: string;
   email: string;
   password: string;
 }
@@ -17,16 +14,22 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model <UserAttributes>
     implements UserAttributes {
     userName!: string;
+    userUUID!: string;
     email!: string;
     password!: string;
 
-    static associate() {
+    static associate({Board}: any) {
+      this.hasMany(Board, { foreignKey: "user_id" })
     }
   }
 
   User.init({
     userName: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userUUID: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
     email: {
