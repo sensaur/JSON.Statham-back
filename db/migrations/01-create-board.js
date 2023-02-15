@@ -12,6 +12,12 @@ module.exports = {
       boardTitle: {
         type: Sequelize.STRING,
       },
+      order: {
+        type: Sequelize.INTEGER
+      },
+      color: {
+        type: Sequelize.STRING
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {

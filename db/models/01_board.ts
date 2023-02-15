@@ -6,6 +6,8 @@ import {
 interface BoardAttributes {
   boardTitle: string;
   boardUUID: string;
+  order: number;
+  color: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -13,6 +15,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     implements BoardAttributes {
     boardTitle!: string;
     boardUUID!: string;
+    order!: number;
+    color!: string;
     static associate({User}: any) {
       this.belongsTo(User, { foreignKey: "user_id" });
     }
@@ -26,6 +30,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
     boardUUID: {
       type: DataTypes.UUID,
       allowNull: false,
+    },
+    order: {
+      type: DataTypes.INTEGER,
+    },
+    color: {
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,
