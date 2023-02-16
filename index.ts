@@ -33,9 +33,9 @@ app.use(
       {secret: COOKIE_SECRET}
     ),
     cookie: {
-      // secure: false, //
+      secure: false, //
       httpOnly: true, //
-      secure: true,
+      // secure: true,
       sameSite: 'none',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 DAY
     },
