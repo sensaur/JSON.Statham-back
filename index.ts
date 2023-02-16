@@ -38,7 +38,7 @@ app.use(
       secure: false, //
       // domain: "localhost",
       httpOnly: true, ///
-      sameSite: 'none',
+      // sameSite: 'none',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 DAY
     },
   })
