@@ -35,6 +35,7 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
+      sameSite: 'None',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 DAY
     },
   })
