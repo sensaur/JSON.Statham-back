@@ -4,7 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 require('dotenv').config()
 
 const getAllBoards = async (req: any, res: any) => {
-  console.log(req.session.user.id)
+  // console.log("123", req.session.user.id)
+  console.log("111")
   try {
     const allBoards = await db.Board.findAll({
       attributes: ['boardUUID', 'boardTitle', 'order', 'color'],
@@ -18,12 +19,14 @@ const getAllBoards = async (req: any, res: any) => {
     // console.log(allBoards)
     return res.json(allBoards);
   } catch (error) {
+    console.log(error)
     return res.sendStatus(500);
   }
 }
 
 const createBoard = async (req: any, res: any) => {
-  console.log(req.session.user.id)
+  // console.log(req.session.user.id)
+  console.log("222")
   const boardUUID = uuidv4();
   const {boardTitle, order, color} = req.body;
   try {
@@ -42,6 +45,7 @@ const createBoard = async (req: any, res: any) => {
 }
 
 const editBoard = async (req: any, res: any) => {
+  console.log("333")
   const {boardTitle} = req.body
   const {id} = req.params
   try {

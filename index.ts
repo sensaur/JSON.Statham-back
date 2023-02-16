@@ -11,7 +11,7 @@ const app = express()
 const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
 const boardRouter = require('./routes/board.router')
-const checkAuthorization = require('./middlewares/checkAuth')
+// const checkAuthorization = require('./middlewares/checkAuth')
 app.set("cookieName", COOKIE_NAME);
 // app.use(morgan("dev"));
 app.use(express.json());
