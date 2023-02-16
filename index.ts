@@ -1,3 +1,5 @@
+import { strict } from "assert";
+
 require('dotenv').config()
 const {PORT, COOKIE_SECRET, COOKIE_NAME, secretKey} = process.env;
 const express = require('express');
@@ -35,7 +37,7 @@ app.use(
     cookie: {
       secure: false, //
       httpOnly: true, //
-      sameSite: false,
+      sameSite: 'strict',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 DAY
     },
   })
