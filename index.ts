@@ -17,7 +17,7 @@ app.set("cookieName", COOKIE_NAME);
 app.use(express.json());
 app.use(cors(
   {
-    origin: ['https://json-statham.com', 'http://localhost:3000'],
+    origin: ['https://json-statham.com', 'http://localhost:3000', 'http://127.0.0.1:3000/'],
     credentials: true
   }
 ));
@@ -35,6 +35,7 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
+      // sameSite: 'None',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 DAY
     },
   })
