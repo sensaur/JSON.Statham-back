@@ -41,8 +41,9 @@ app.use(
 );
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/users", checkAuthorization, userRouter);
-app.use("/api/v1/boards", checkAuthorization, boardRouter);
+app.use("/api/v1/users", userRouter);
+// app.use("/api/v1/users", checkAuthorization, userRouter);
+app.use("/api/v1/boards", boardRouter);
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`)
