@@ -5,7 +5,6 @@ require('dotenv').config()
 
 const getAllBoards = async (req: any, res: any) => {
   // console.log("123", req.session.user.id)
-  console.log("111")
   try {
     const allBoards = await db.Board.findAll({
       attributes: ['boardUUID', 'boardTitle', 'order', 'color'],
@@ -26,7 +25,6 @@ const getAllBoards = async (req: any, res: any) => {
 
 const createBoard = async (req: any, res: any) => {
   // console.log(req.session.user.id)
-  console.log("222")
   const boardUUID = uuidv4();
   const {boardTitle, order, color} = req.body;
   try {
@@ -70,4 +68,15 @@ const getBoard = async (req: any, res: any) => {
   }
 }
 
-export { getAllBoards, editBoard, createBoard, getBoard }
+const deleteBoard = async (req: any, res: any) => {
+  const {id} = req.params
+  try {
+    await db.Board.destroy({where: {boardUUID: id}})
+    return res.json("Board Deleted").status(204);
+  } catch (error) {
+    console.log(error)
+    return res.sendStatus(500);
+  }
+}
+
+export { getAllBoards, editBoard, createBoard, getBoard, deleteBoard }
