@@ -4,12 +4,13 @@ const { v4: uuidv4 } = require('uuid');
 require('dotenv').config()
 
 const getAllCards = async (req: any, res: any) => {
+  console.log(req.session.user)
   try {
     const allCards = await db.Card.findAll({
       attributes: ['id', 'cardTitle', 'order', 'color'],
       include: [{
         model: db.User,
-        // where: {id: req.session.user.id},
+        where: {id: req.session.user.id},
         attributes: ['userName', 'userUUID']
       }],
     });

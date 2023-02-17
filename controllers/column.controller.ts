@@ -8,10 +8,11 @@ const getAllColumns = async (req: any, res: any) => {
   try {
     const allColumns = await db.Column.findAll({
       attributes: ['id', 'columnTitle', 'order'],
-      // include: [{
-      //   model: db.User,
-      //   attributes: ['userName', 'userUUID']
-      // }],
+      include: [{
+        model: db.User,
+        where: {id: req.session.user.id},
+        attributes: ['userName', 'userUUID']
+      }],
     });
     return res.json(allColumns);
   } catch (error) {
@@ -23,13 +24,14 @@ const getAllColumns = async (req: any, res: any) => {
 const createColumn = async (req: any, res: any) => {
   if(req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const id = uuidv4();
-  const {columnTitle, order} = req.body;
+  const {columnTitle, order, card_id} = req.body;
   try {
     const newColumn = await db.Column.create({
       columnTitle,
       order,
       user_id: req.session.user.id,
-      id
+      id,
+      card_id
     });
     return res.json(newColumn);
   } catch (error) {
