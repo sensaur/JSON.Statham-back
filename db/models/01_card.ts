@@ -5,7 +5,6 @@ import {
 
 interface cardAttributes {
   cardTitle: string;
-  cardUUID: string;
   order: number;
   color: string;
   user_id: number;
@@ -18,7 +17,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     order!: number;
     color!: string;
     user_id!: number;
-    cardUUID!: string;
     static associate({User, Column}: any) {
       this.belongsTo(User, { foreignKey: "user_id" });
       this.hasMany(Column, { foreignKey: "card_id" })
@@ -38,10 +36,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     user_id: {
       type: DataTypes.STRING,
-    },
-    cardUUID: {
-      type: DataTypes.UUID,
-      allowNull: false,
     },
   }, {
     sequelize,

@@ -5,7 +5,6 @@ import {
 
 interface ColumnAttributes {
   columnTitle: string;
-  columnUUID: string;
   order: number;
   card_id: number;
 }
@@ -14,7 +13,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class Column extends Model <ColumnAttributes>
     implements ColumnAttributes {
     columnTitle!: string;
-    columnUUID!: string;
     order!: number;
     card_id!: number;
     static associate({Card}: any) {
@@ -25,10 +23,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
   Column.init({
     columnTitle: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    columnUUID: {
-      type: DataTypes.UUID,
       allowNull: false,
     },
     order: {

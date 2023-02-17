@@ -4,10 +4,14 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Cards', {
       id: {
+        // allowNull: false,
+        // autoIncrement: true,
+        // // primaryKey: true,
+        // type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
       cardTitle: {
         type: Sequelize.STRING,
@@ -29,9 +33,12 @@ module.exports = {
         },
         onUpdate: "CASCADE",
       },
-      cardUUID: {
-        type: Sequelize.UUID,
-      },
+      // cardUUID: {
+      //   type: Sequelize.STRING,
+      //   unique: true,
+      //   allowNull: false,
+      //   primaryKey: true
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

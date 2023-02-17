@@ -6,7 +6,7 @@ require('dotenv').config()
 const getAllCards = async (req: any, res: any) => {
   try {
     const allCards = await db.Card.findAll({
-      attributes: ['cardUUID', 'cardTitle', 'order', 'color'],
+      attributes: ['id', 'cardTitle', 'order', 'color'],
       include: [{
         model: db.User,
         // where: {id: req.session.user.id},
@@ -23,7 +23,7 @@ const getAllCards = async (req: any, res: any) => {
 const createCard = async (req: any, res: any) => {
   // console.log(req.session.user.id)
   if(req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
-  const cardUUID = uuidv4();
+  const id = uuidv4();
   const {cardTitle, order, color} = req.body;
   try {
     const newCard = await db.Card.create({
@@ -31,7 +31,7 @@ const createCard = async (req: any, res: any) => {
       order,
       color,
       user_id: req.session.user.id,
-      cardUUID
+      id,
     });
     return res.json(newCard);
   } catch (error) {
@@ -44,7 +44,7 @@ const editCard = async (req: any, res: any) => {
   const {cardTitle} = req.body
   const {id} = req.params
   try {
-    const updatedCard = await db.Card.findOne({where: {cardUUID: id}});
+    const updatedCard = await db.Card.findOne({where: {id: id}});
     await updatedCard.update({cardTitle})
     return res.json("Card info updated on server").status(200);
   } catch (error) {
@@ -56,8 +56,8 @@ const editCard = async (req: any, res: any) => {
 const getCard = async (req: any, res: any) => {
   const {id} = req.params
   try {
-    const card = await db.Card.findOne({where: {cardUUID: id},
-    attributes:['cardTitle', 'cardUUID', 'order' , 'color']});
+    const card = await db.Card.findOne({where: {id: id},
+    attributes:['cardTitle', 'id', 'order' , 'color']});
     return res.json(card).status(200);
   } catch (error) {
     console.log(error)
@@ -68,7 +68,7 @@ const getCard = async (req: any, res: any) => {
 const deleteCard = async (req: any, res: any) => {
   const {id} = req.params
   try {
-    await db.Card.destroy({where: {cardUUID: id}})
+    await db.Card.destroy({where: {id: id}})
     return res.json("Card Deleted").status(204);
   } catch (error) {
     console.log(error)

@@ -4,10 +4,14 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Columns', {
       id: {
+        // allowNull: false,
+        // autoIncrement: true,
+        // primaryKey: true,
+        // type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
       columnTitle: {
         type: Sequelize.STRING,
@@ -16,7 +20,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       card_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: {
             tableName: "Cards",
@@ -24,9 +28,6 @@ module.exports = {
             as: "card_id",
           },
         }
-      },
-      columnUUID: {
-        type: Sequelize.UUID,
       },
       createdAt: {
         allowNull: false,
