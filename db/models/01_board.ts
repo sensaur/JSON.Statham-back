@@ -19,6 +19,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     color!: string;
     static associate({User}: any) {
       this.belongsTo(User, { foreignKey: "user_id" });
+      // this.hasMany(Column, { foreignKey: "board_id" })
     }
   }
 

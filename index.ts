@@ -13,6 +13,7 @@ const app = express()
 const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
 const boardRouter = require('./routes/board.router')
+const columnRouter = require('./routes/column.router')
 // const checkAuthorization = require('./middlewares/checkAuth')
 app.set("cookieName", COOKIE_NAME);
 // app.use(morgan("dev"));
@@ -48,6 +49,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/users", checkAuthorization, userRouter);
 app.use("/api/v1/boards", boardRouter);
+app.use("/api/v1/columns", columnRouter);
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`)
