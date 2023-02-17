@@ -8,18 +8,20 @@ interface BoardAttributes {
   boardUUID: string;
   order: number;
   color: string;
+  user_id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class Board extends Model <BoardAttributes>
     implements BoardAttributes {
     boardTitle!: string;
-    boardUUID!: string;
     order!: number;
     color!: string;
-    static associate({User}: any) {
+    user_id!: number;
+    boardUUID!: string;
+    static associate({User, Column}: any) {
       this.belongsTo(User, { foreignKey: "user_id" });
-      // this.hasMany(Column, { foreignKey: "board_id" })
+      this.hasMany(Column, { foreignKey: "board_id" })
     }
   }
 
@@ -28,15 +30,18 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    boardUUID: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
     order: {
       type: DataTypes.INTEGER,
     },
     color: {
       type: DataTypes.STRING,
+    },
+    user_id: {
+      type: DataTypes.STRING,
+    },
+    boardUUID: {
+      type: DataTypes.UUID,
+      allowNull: false,
     },
   }, {
     sequelize,

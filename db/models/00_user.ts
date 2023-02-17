@@ -17,7 +17,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     userUUID!: string;
     email!: string;
     password!: string;
-
     static associate({Board}: any) {
       this.hasMany(Board, { foreignKey: "user_id" })
     }
