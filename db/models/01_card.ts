@@ -3,30 +3,30 @@ import {
   Model
 } from 'sequelize';
 
-interface BoardAttributes {
-  boardTitle: string;
-  boardUUID: string;
+interface cardAttributes {
+  cardTitle: string;
+  cardUUID: string;
   order: number;
   color: string;
   user_id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Board extends Model <BoardAttributes>
-    implements BoardAttributes {
-    boardTitle!: string;
+  class Card extends Model <cardAttributes>
+    implements cardAttributes {
+    cardTitle!: string;
     order!: number;
     color!: string;
     user_id!: number;
-    boardUUID!: string;
+    cardUUID!: string;
     static associate({User, Column}: any) {
       this.belongsTo(User, { foreignKey: "user_id" });
-      this.hasMany(Column, { foreignKey: "board_id" })
+      this.hasMany(Column, { foreignKey: "card_id" })
     }
   }
 
-  Board.init({
-    boardTitle: {
+  Card.init({
+    cardTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -39,13 +39,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     user_id: {
       type: DataTypes.STRING,
     },
-    boardUUID: {
+    cardUUID: {
       type: DataTypes.UUID,
       allowNull: false,
     },
   }, {
     sequelize,
-    modelName: 'Board',
+    modelName: 'Card',
   });
-  return Board;
+  return Card;
 };

@@ -12,7 +12,7 @@ const app = express()
 // const morgan = require("morgan");
 const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
-const boardRouter = require('./routes/board.router')
+const cardRouter = require('./routes/card.router')
 const columnRouter = require('./routes/column.router')
 // const checkAuthorization = require('./middlewares/checkAuth')
 app.set("cookieName", COOKIE_NAME);
@@ -48,7 +48,7 @@ app.use(
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/users", checkAuthorization, userRouter);
-app.use("/api/v1/boards", boardRouter);
+app.use("/api/v1/cards", cardRouter);
 app.use("/api/v1/columns", columnRouter);
 
 app.listen(PORT, () => {

@@ -15,7 +15,6 @@ const getAllUsers = async (req: any, res: any) => {
 }
 
 const editUser = async (req: any, res: any) => {
-  // console.log(req.body)
   const {userName, email, id} = req.body
   try {
     const updatedUser = await db.User.findOne({where: {id}});

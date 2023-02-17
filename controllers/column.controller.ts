@@ -21,6 +21,7 @@ const getAllColumns = async (req: any, res: any) => {
 }
 
 const createColumn = async (req: any, res: any) => {
+  if(req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const columnUUID = uuidv4();
   const {columnTitle, order} = req.body;
   try {

@@ -15,13 +15,13 @@ module.exports = {
       order: {
         type: Sequelize.INTEGER
       },
-      board_id: {
+      card_id: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: "Boards",
+            tableName: "Cards",
             key: "id",
-            as: "board_id",
+            as: "card_id",
           },
         }
       },

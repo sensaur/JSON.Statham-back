@@ -2,14 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Boards', {
+    await queryInterface.createTable('Cards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      boardTitle: {
+      cardTitle: {
         type: Sequelize.STRING,
       },
       order: {
@@ -29,7 +29,7 @@ module.exports = {
         },
         onUpdate: "CASCADE",
       },
-      boardUUID: {
+      cardUUID: {
         type: Sequelize.UUID,
       },
       createdAt: {
@@ -43,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Boards');
+    await queryInterface.dropTable('Cards');
   }
 };

@@ -7,7 +7,7 @@ interface ColumnAttributes {
   columnTitle: string;
   columnUUID: string;
   order: number;
-  board_id: number;
+  card_id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -16,9 +16,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     columnTitle!: string;
     columnUUID!: string;
     order!: number;
-    board_id!: number;
-    static associate({Board}: any) {
-      this.belongsTo(Board, { foreignKey: "board_id" });
+    card_id!: number;
+    static associate({Card}: any) {
+      this.belongsTo(Card, { foreignKey: "card_id" });
     }
   }
 
@@ -34,7 +34,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     order: {
       type: DataTypes.INTEGER,
     },
-    board_id: {
+    card_id: {
       type: DataTypes.INTEGER,
     },
   }, {
