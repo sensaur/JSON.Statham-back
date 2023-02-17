@@ -11,7 +11,7 @@ const getAllBoards = async (req: any, res: any) => {
       attributes: ['boardUUID', 'boardTitle', 'order', 'color'],
       include: [{
         model: db.User,
-        where: {id: req.session.user.id},
+        // where: {id: req.session.user.id},
         attributes: ['userName', 'userUUID']
       }],
       // raw: true
