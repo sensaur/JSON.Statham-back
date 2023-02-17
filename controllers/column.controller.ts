@@ -8,11 +8,11 @@ const getAllColumns = async (req: any, res: any) => {
   try {
     const allColumns = await db.Column.findAll({
       attributes: ['id', 'columnTitle', 'order'],
-      include: [{
-        model: db.User,
-        where: {id: req.session.user.id},
-        attributes: ['userName', 'userUUID']
-      }],
+      // include: [{
+      //   model: db.User,
+      //   where: {id: req.session.user.id},
+      //   attributes: ['userName', 'userUUID']
+      // }],
     });
     return res.json(allColumns);
   } catch (error) {
