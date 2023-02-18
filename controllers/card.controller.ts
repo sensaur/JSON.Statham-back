@@ -1,5 +1,6 @@
 import db from "../db/models"
-const { v4: uuidv4 } = require('uuid');
+
+const {v4: uuidv4} = require('uuid');
 
 require('dotenv').config()
 
@@ -23,7 +24,7 @@ const getAllCards = async (req: any, res: any) => {
 
 const createCard = async (req: any, res: any) => {
   // console.log(req.session.user.id)
-  if(req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
+  if (req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const id = uuidv4();
   const {cardTitle, order, color} = req.body;
   try {
@@ -60,8 +61,15 @@ const editCard = async (req: any, res: any) => {
 const getCard = async (req: any, res: any) => {
   const {id} = req.params
   try {
-    const card = await db.Card.findOne({where: {id: id},
-    attributes:['cardTitle', 'id', 'order' , 'color']});
+    const card = await db.Card.findOne({
+      where: {id: id},
+      attributes: ['cardTitle', 'id', 'order', 'color'],
+      include: [{
+        model: db.Column,
+        where: {card_id: id},
+        attributes: ['columnTitle', 'order', 'id']
+      }],
+    });
     return res.json(card).status(200);
   } catch (error) {
     console.log(error)
