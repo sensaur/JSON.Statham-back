@@ -14,6 +14,7 @@ const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
 const cardRouter = require('./routes/card.router')
 const columnRouter = require('./routes/column.router')
+const taskRouter = require('./routes/task.router')
 // const checkAuthorization = require('./middlewares/checkAuth')
 app.set("cookieName", COOKIE_NAME);
 // app.use(morgan("dev"));
@@ -50,6 +51,7 @@ app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/users", checkAuthorization, userRouter);
 app.use("/api/v1/cards", cardRouter);
 app.use("/api/v1/columns", columnRouter);
+app.use("/api/v1/tasks", taskRouter);
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`)

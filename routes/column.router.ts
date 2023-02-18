@@ -1,13 +1,13 @@
 const { Router } = require("express");
 import { getAllColumns , createColumn, editColumn, getColumn, deleteColumn } from "../controllers/column.controller";
 
-const columnsRouter = Router();
+const TasksRouter = Router();
 
-columnsRouter.get("/", getAllColumns);
-columnsRouter.post("/", createColumn);
-columnsRouter.route("/:id").patch(editColumn)
-columnsRouter.route("/:id").get(getColumn)
-columnsRouter.route("/:id").delete(deleteColumn)
+TasksRouter.get("/", getAllColumns);
+TasksRouter.post("/", createColumn);
+TasksRouter.route("/:id").patch(editColumn)
+TasksRouter.route("/:id").get(getColumn)
+TasksRouter.route("/:id").delete(deleteColumn)
 
-module.exports = columnsRouter;
+module.exports = TasksRouter;
 

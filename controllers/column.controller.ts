@@ -5,18 +5,11 @@ const {v4: uuidv4} = require('uuid');
 require('dotenv').config()
 
 const getAllColumns = async (req: any, res: any) => {
-  // const id = req.session.user.id;
   try {
-    const allColumns = await db.Column.findAll({
+    const allTasks = await db.Column.findAll({
       attributes: ['id', 'columnTitle', 'order'],
-      // where: {user_id: id}
-      // include: [{
-      //   model: db.User,
-      //   where: {id: req.session.user.id},
-      //   attributes: ['userName', 'userUUID']
-      // }],
     });
-    return res.json(allColumns);
+    return res.json(allTasks);
   } catch (error) {
     console.log(error)
     return res.sendStatus(500);

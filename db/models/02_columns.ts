@@ -17,8 +17,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     order!: number;
     card_id!: number;
     // user_id!: number;
-    static associate({Card}: any) {
+    static associate({Card, Task}: any) {
       this.belongsTo(Card, { foreignKey: "card_id" });
+      this.hasMany(Task, { foreignKey: "column_id" })
     }
   }
 

@@ -2,26 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Columns', {
+    await queryInterface.createTable('Tasks', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true
       },
-      columnTitle: {
+      taskTitle: {
         type: Sequelize.STRING,
       },
       order: {
         type: Sequelize.INTEGER
       },
-      card_id: {
+      column_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: "Cards",
+            tableName: "Columns",
             key: "id",
-            as: "card_id",
+            as: "column_id",
           },
         }
       },
@@ -36,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Columns');
+    await queryInterface.dropTable('Tasks');
   }
 }
