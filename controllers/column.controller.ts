@@ -80,4 +80,20 @@ const deleteColumn = async (req: any, res: any) => {
   }
 }
 
-export { getAllColumns, editColumn, createColumn, getColumn, deleteColumn }
+const setColumnsOrder = async (req: any, res: any) => {
+  const array = req.body
+  try {
+    for (let i = 0; i < array.length; i++) {
+      const entry = await db.Column.findOne({where: {id: array[i].id}});
+      await entry.update({order: array[i].order})
+      // console.log(array[i].order)
+      // await db.Column.update({order: array[i].order})
+    }
+      // const res = await db.Column.findAll({where:})
+    res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+}
+
+export { getAllColumns, editColumn, createColumn, getColumn, deleteColumn, setColumnsOrder }
