@@ -42,11 +42,14 @@ const createCard = async (req: any, res: any) => {
 }
 
 const editCard = async (req: any, res: any) => {
-  const {cardTitle} = req.body
+  const {cardTitle, order} = req.body
+  // console.log(order)
+  // console.log(cardTitle)
   const {id} = req.params
+  console.log(id)
   try {
     const updatedCard = await db.Card.findOne({where: {id: id}});
-    await updatedCard.update({cardTitle})
+    await updatedCard.update({cardTitle, order})
     return res.json("Card info updated on server").status(200);
   } catch (error) {
     console.log(error)

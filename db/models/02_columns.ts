@@ -7,6 +7,7 @@ interface ColumnAttributes {
   columnTitle: string;
   order: number;
   card_id: number;
+  // user_id: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -15,6 +16,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     columnTitle!: string;
     order!: number;
     card_id!: number;
+    // user_id!: number;
     static associate({Card}: any) {
       this.belongsTo(Card, { foreignKey: "card_id" });
     }
@@ -31,6 +33,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
     card_id: {
       type: DataTypes.INTEGER,
     },
+    // user_id: {
+    //   type: DataTypes.INTEGER,
+    // },
   }, {
     sequelize,
     modelName: 'Column',

@@ -5,9 +5,11 @@ const {v4: uuidv4} = require('uuid');
 require('dotenv').config()
 
 const getAllColumns = async (req: any, res: any) => {
+  // const id = req.session.user.id;
   try {
     const allColumns = await db.Column.findAll({
       attributes: ['id', 'columnTitle', 'order'],
+      // where: {user_id: id}
       // include: [{
       //   model: db.User,
       //   where: {id: req.session.user.id},
@@ -22,7 +24,7 @@ const getAllColumns = async (req: any, res: any) => {
 }
 
 const createColumn = async (req: any, res: any) => {
-  if(req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
+  if (req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const id = uuidv4();
   const {columnTitle, order, card_id} = req.body;
   try {
@@ -41,11 +43,11 @@ const createColumn = async (req: any, res: any) => {
 }
 
 const editColumn = async (req: any, res: any) => {
-  const {columnTitle} = req.body
+  const {columnTitle, order} = req.body
   const {id} = req.params
   try {
     const updatedBoard = await db.Column.findOne({where: {id: id}});
-    await updatedBoard.update({columnTitle})
+    await updatedBoard.update({columnTitle, order})
     const updatedBoard2 = await db.Column.findOne({where: {id: id}, raw: true});
     console.log(updatedBoard2)
     return res.json("Column info updated on server").status(200);
