@@ -23,7 +23,8 @@ module.exports = {
             key: "id",
             as: "column_id",
           },
-        }
+        },
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,

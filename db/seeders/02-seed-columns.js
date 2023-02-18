@@ -19,6 +19,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        columnTitle: "IZ column title 1",
+        order: 1,
+        id: "75888016-ecdf-49c2-9f34-3b3cadafb896",
+        card_id: "b80c3438-a30c-49fb-a2dd-bc1872ed8316",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        columnTitle: "IZ column title 2",
+        order: 2,
+        id: "f0a1d551-1886-491c-b5d3-8e81c6d5d1a4",
+        card_id: "b80c3438-a30c-49fb-a2dd-bc1872ed8316",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
   },
 

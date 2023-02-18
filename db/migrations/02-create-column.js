@@ -23,7 +23,8 @@ module.exports = {
             key: "id",
             as: "card_id",
           },
-        }
+        },
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,

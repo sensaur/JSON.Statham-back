@@ -18,7 +18,7 @@ module.exports = {
         column_id: "526e341d-5790-41c8-9fcd-09ce0c641435",
         createdAt: new Date(),
         updatedAt: new Date()
-      },
+      }
     ], {});
   },
 
