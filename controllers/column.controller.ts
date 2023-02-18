@@ -55,7 +55,12 @@ const getColumn = async (req: any, res: any) => {
   try {
     const column = await db.Column.findOne({
       where: {id: id},
-      attributes: ['columnTitle', 'id', 'order']
+      attributes: ['columnTitle', 'id', 'order'],
+      include: [{
+        model: db.Task,
+        where: {column_id: id},
+        attributes: ['taskTitle', 'order', 'id']
+      }],
     });
     return res.json(column).status(200);
   } catch (error) {
