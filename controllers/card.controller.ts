@@ -70,7 +70,13 @@ const getCard = async (req: any, res: any) => {
         attributes: ['columnTitle', 'order', 'id']
       }],
     });
-    return res.json(card).status(200);
+    const emptyCard = await db.Card.findOne({
+      where: {id: id},
+      attributes: ['cardTitle', 'id', 'order', 'color'],
+      raw: true
+    })
+    emptyCard.Columns = []
+    return res.json(card || emptyCard).status(200);
   } catch (error) {
     console.log(error)
     return res.sendStatus(500);
