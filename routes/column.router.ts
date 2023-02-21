@@ -8,14 +8,14 @@ import {
   setColumnsOrder
 } from "../controllers/column.controller";
 
-const TasksRouter = Router();
+const ColumnsRouter = Router();
 
-TasksRouter.get("/", getAllColumns);
-TasksRouter.post("/", createColumn);
-TasksRouter.put("/setColumnsOrder", setColumnsOrder);
-TasksRouter.route("/:id").patch(editColumn)
-TasksRouter.route("/:id").get(getColumn)
-TasksRouter.route("/:id").delete(deleteColumn)
+ColumnsRouter.get("/", getAllColumns);
+ColumnsRouter.post("/", createColumn);
+ColumnsRouter.put("/setColumnsOrder", setColumnsOrder);
+ColumnsRouter.route("/:id").patch(editColumn)
+ColumnsRouter.route("/:id").get(getColumn)
+ColumnsRouter.route("/:id").delete(deleteColumn)
 
-module.exports = TasksRouter;
+module.exports = ColumnsRouter;
 
