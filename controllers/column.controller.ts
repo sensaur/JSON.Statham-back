@@ -62,7 +62,13 @@ const getColumn = async (req: any, res: any) => {
         attributes: ['taskTitle', 'order', 'id']
       }],
     });
-    return res.json(column).status(200);
+    const emptyTask = await db.Column.findOne({
+      where: {id: id},
+      attributes: ['columnTitle', 'id', 'order'],
+      raw: true
+    })
+    emptyTask.Tasks = []
+    return res.json(column || emptyTask).status(200);
   } catch (error) {
     console.log(error)
     return res.sendStatus(500);

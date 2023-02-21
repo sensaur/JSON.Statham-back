@@ -7,6 +7,7 @@ const session = require("express-session");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
+// const redisClient = redis.createClient();
 const cors = require("cors");
 const app = express()
 // const morgan = require("morgan");
