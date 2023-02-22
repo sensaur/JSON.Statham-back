@@ -12,6 +12,9 @@ module.exports = {
       taskTitle: {
         type: Sequelize.STRING,
       },
+      taskDescription: {
+        type: Sequelize.STRING,
+      },
       order: {
         type: Sequelize.INTEGER
       },
@@ -25,6 +28,9 @@ module.exports = {
           },
         },
         onDelete: "CASCADE",
+      },
+      isDone: {
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

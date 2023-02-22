@@ -7,7 +7,7 @@ require('dotenv').config()
 const getAllTasks = async (req: any, res: any) => {
   try {
     const allTasks = await db.Task.findAll({
-      attributes: ['id', 'taskTitle', 'order'],
+      attributes: ['id', 'taskTitle', 'order', 'isDone', 'taskDescription'],
     });
     return res.json(allTasks);
   } catch (error) {
@@ -19,11 +19,13 @@ const getAllTasks = async (req: any, res: any) => {
 const createTask = async (req: any, res: any) => {
   if (req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const id = uuidv4();
-  const {taskTitle, order, column_id} = req.body;
+  const {taskTitle, order, column_id, isDone, taskDescription} = req.body;
   try {
     const newTask = await db.Task.create({
       taskTitle,
       order,
+      isDone,
+      taskDescription,
       // user_id: req.session.user.id,
       id,
       column_id
@@ -36,11 +38,11 @@ const createTask = async (req: any, res: any) => {
 }
 
 const editTask = async (req: any, res: any) => {
-  const {taskTitle, order} = req.body
+  const {taskTitle, order, isDone, taskDescription} = req.body
   const {id} = req.params
   try {
     const updatedTask = await db.Task.findOne({where: {id: id}});
-    await updatedTask.update({taskTitle, order})
+    await updatedTask.update({taskTitle, order, isDone, taskDescription})
     return res.json("Task info updated on server").status(200);
   } catch (error) {
     console.log(error)
@@ -53,7 +55,7 @@ const getTask = async (req: any, res: any) => {
   try {
     const task = await db.Task.findOne({
       where: {id: id},
-      attributes: ['taskTitle', 'id', 'order']
+      attributes: ['taskTitle', 'id', 'order', 'isDone', 'taskDescription']
     });
     return res.json(task).status(200);
   } catch (error) {
