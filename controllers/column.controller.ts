@@ -59,7 +59,7 @@ const getColumn = async (req: any, res: any) => {
       include: [{
         model: db.Task,
         where: {column_id: id},
-        attributes: ['taskTitle', 'order', 'id']
+        attributes: ['taskTitle', 'order', 'id', 'isDone', 'taskDescription']
       }],
     });
     const emptyTask = await db.Column.findOne({
