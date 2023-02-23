@@ -35,7 +35,7 @@ const editUser = async (req: any, res: any) => {
     const updatedUser = await db.User.findOne({where: {id}});
     updatedUser.userName = userName;
     updatedUser.email = email;
-    updatedUser.avatar = avatar
+    updatedUser.avatar = avatar || 'none'
     await updatedUser.save()
     return res.json("User info updated on server").status(200);
   } catch (error) {
