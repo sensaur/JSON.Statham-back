@@ -6,6 +6,7 @@ require('dotenv').config()
 const signUp = async (req: any, res: any) => {
   try {
     const {password, email, userName} = req.body;
+    const {v4: uuidv4} = require('uuid');
     if (password && email) {
       try {
         const hashPassword = await bcrypt.hash(password, Number(process.env.saltRounds));
@@ -14,15 +15,17 @@ const signUp = async (req: any, res: any) => {
             password: hashPassword,
             email,
             userName,
+            userUUID: uuidv4()
           },
           {
             returning: true,
             plain: true,
           }
         );
-        console.log('newUser=>', newUser)
-        return res.json('Пользователь успешно создан')
+        // console.log('newUser=>', newUser)
+        return res.json('User registered')
       } catch (error: any) {
+        // console.log(error)
         return res.sendStatus(500);
       }
     }
