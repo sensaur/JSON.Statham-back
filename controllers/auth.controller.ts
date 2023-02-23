@@ -53,7 +53,7 @@ const signIn = async (req: any, res: any) => {
         };
         // console.log(req.session.user)
         // console.log(currentUser)
-        return res.json({id: currentUser.id, userName: currentUser.userName, email: currentUser.email});
+        return res.json({id: currentUser.id, userName: currentUser.userName, email: currentUser.email, avatar: currentUser.avatar });
       }
       return setTimeout(() => res.sendStatus(401), 1e3);
     } catch (error) {

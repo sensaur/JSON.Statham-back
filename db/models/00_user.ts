@@ -8,6 +8,7 @@ interface UserAttributes {
   userUUID: string;
   email: string;
   password: string;
+  avatar: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -15,6 +16,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     implements UserAttributes {
     userName!: string;
     userUUID!: string;
+    avatar!: string;
     email!: string;
     password!: string;
     static associate({Card}: any) {
@@ -37,6 +39,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       unique: true
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    avatar: {
       type: DataTypes.STRING,
       allowNull: false,
     },
