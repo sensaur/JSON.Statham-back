@@ -1,3 +1,5 @@
+import path from "path";
+
 require('dotenv').config()
 const {PORT, COOKIE_SECRET, COOKIE_NAME, secretKey} = process.env;
 const express = require('express');
@@ -5,23 +7,9 @@ const moment = require("moment")
 const session = require("express-session");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
-const redisClient = redis.createClient({url: process.env.REDIS_URL});
-// const redisClient = redis.createClient();
-let multer = require('multer');
+// const redisClient = redis.createClient({url: process.env.REDIS_URL});
+const redisClient = redis.createClient();
 const cors = require("cors");
-
-const storageConfig = multer.diskStorage({
-  destination: (req: any, file: any, cb: any) => {
-    cb(null, "./src/public/uploads");
-  },
-  filename: (req: any, file: any, cb: any) => {
-    const currentTime = new Date()
-    const dateForFileName = moment(currentTime.toISOString(), "YYYY-MM-DDTHH-mm-ss").format("YYYY-MM-DD__HH-mm-ss")
-    const ext = file.originalname.split(".").pop()
-    cb(null, `${dateForFileName}.${ext}`);
-  },
-});
-const upload = multer({storage: storageConfig});
 const app = express()
 // const morgan = require("morgan");
 const authRouter = require('./routes/auth.router')
@@ -36,7 +24,8 @@ app.use(express.json());
 app.use(cors(
   {
     origin: ['https://json-statham.com', 'http://localhost:3000', 'http://127.0.0.1:3000'],
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE']
   }
 ));
 
@@ -60,6 +49,7 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, "src", "public", "uploads")));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/users", checkAuthorization, userRouter);

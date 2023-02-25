@@ -15,7 +15,8 @@ const signUp = async (req: any, res: any) => {
             password: hashPassword,
             email,
             userName,
-            userUUID: uuidv4()
+            userUUID: uuidv4(),
+            avatar: 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'
           },
           {
             returning: true,
@@ -25,7 +26,7 @@ const signUp = async (req: any, res: any) => {
         // console.log('newUser=>', newUser)
         return res.json('User registered')
       } catch (error: any) {
-        // console.log(error)
+        console.log(error)
         return res.sendStatus(500);
       }
     }
