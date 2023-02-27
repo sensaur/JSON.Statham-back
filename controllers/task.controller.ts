@@ -26,7 +26,6 @@ const createTask = async (req: any, res: any) => {
       order,
       isDone,
       taskDescription,
-      // user_id: req.session.user.id,
       id,
       column_id
     });
@@ -77,7 +76,6 @@ const deleteTask = async (req: any, res: any) => {
 
 const setTasksOrder = async (req: any, res: any) => {
   const array = req.body
-  console.log(array)
   try {
     for (let i = 0; i < array.length; i++) {
       const entry = await db.Task.findOne({where: {id: array[i].taskId}});

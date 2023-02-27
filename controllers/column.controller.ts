@@ -42,7 +42,6 @@ const editColumn = async (req: any, res: any) => {
     const updatedBoard = await db.Column.findOne({where: {id: id}});
     await updatedBoard.update({columnTitle, order})
     const updatedBoard2 = await db.Column.findOne({where: {id: id}, raw: true});
-    console.log(updatedBoard2)
     return res.json("Column info updated on server").status(200);
   } catch (error) {
     console.log(error)
@@ -92,10 +91,7 @@ const setColumnsOrder = async (req: any, res: any) => {
     for (let i = 0; i < array.length; i++) {
       const entry = await db.Column.findOne({where: {id: array[i].id}});
       await entry.update({order: array[i].order})
-      // console.log(array[i].order)
-      // await db.Column.update({order: array[i].order})
     }
-      // const res = await db.Column.findAll({where:})
     res.sendStatus(200);
   } catch (error) {
     return res.sendStatus(500);

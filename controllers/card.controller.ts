@@ -5,7 +5,6 @@ const {v4: uuidv4} = require('uuid');
 require('dotenv').config()
 
 const getAllCards = async (req: any, res: any) => {
-  console.log(req.session.user)
   try {
     const allCards = await db.Card.findAll({
       attributes: ['id', 'cardTitle', 'order', 'color'],
@@ -23,7 +22,6 @@ const getAllCards = async (req: any, res: any) => {
 }
 
 const createCard = async (req: any, res: any) => {
-  // console.log(req.session.user.id)
   if (req.session?.user?.id === undefined) return res.json("надо бы авторизоваться").status(401)
   const id = uuidv4();
   const {cardTitle, order, color} = req.body;
@@ -44,10 +42,7 @@ const createCard = async (req: any, res: any) => {
 
 const editCard = async (req: any, res: any) => {
   const {cardTitle, order} = req.body
-  // console.log(order)
-  // console.log(cardTitle)
   const {id} = req.params
-  console.log(id)
   try {
     const updatedCard = await db.Card.findOne({where: {id: id}});
     await updatedCard.update({cardTitle, order})

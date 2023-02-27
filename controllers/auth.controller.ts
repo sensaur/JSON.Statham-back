@@ -23,7 +23,6 @@ const signUp = async (req: any, res: any) => {
             plain: true,
           }
         );
-        // console.log('newUser=>', newUser)
         return res.json('User registered')
       } catch (error: any) {
         console.log(error)
@@ -38,12 +37,9 @@ const signUp = async (req: any, res: any) => {
 
 const signIn = async (req: any, res: any) => {
   const {password, email} = req.body;
-  // console.log(password)
-  // console.log(email)
   if (password && email) {
     try {
       const currentUser = await db.User.findOne({where: {email}});
-      // console.log("currentUser", currentUser.dataValues)
       if (
         currentUser &&
         (await bcrypt.compare(password, currentUser.password))
@@ -52,8 +48,6 @@ const signIn = async (req: any, res: any) => {
           id: currentUser.id,
           userName: currentUser.userName,
         };
-        // console.log(req.session.user)
-        // console.log(currentUser)
         return res.json({id: currentUser.id, userName: currentUser.userName, email: currentUser.email, avatar: currentUser.avatar });
       }
       return setTimeout(() => res.sendStatus(401), 1e3);

@@ -8,10 +8,8 @@ const session = require("express-session");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
-// const redisClient = redis.createClient();
 const cors = require("cors");
 const app = express()
-// const morgan = require("morgan");
 const authRouter = require('./routes/auth.router')
 const userRouter = require('./routes/user.router')
 const cardRouter = require('./routes/card.router')
@@ -19,7 +17,6 @@ const columnRouter = require('./routes/column.router')
 const taskRouter = require('./routes/task.router')
 // const checkAuthorization = require('./middlewares/checkAuth')
 app.set("cookieName", COOKIE_NAME);
-// app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors(
   {
@@ -41,9 +38,7 @@ app.use(
     ),
     cookie: {
       secure: false, //
-      // domain: "localhost",
       httpOnly: true, ///
-      // sameSite: 'none',
       maxAge: 1e3 * 60*60, // COOKIE'S LIFETIME — 1 HOUR
     },
   })
