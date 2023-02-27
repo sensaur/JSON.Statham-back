@@ -55,13 +55,15 @@ const editUser = async (req: any, res: any) => {
       updatedUser.email = email;
       updatedUser.avatar = uploadedImage.Location || 'none'
       await updatedUser.save()
-      return res.json("User info updated on server").status(200);
+      // return res.json("User info updated on server").status(200);
+      return res.json({id: updatedUser.id, userName: updatedUser.userName, email: updatedUser.email, avatar: updatedUser.avatar }).status(200);
     } else {
       const updatedUser = await db.User.findOne({where: {id}});
       updatedUser.userName = userName;
       updatedUser.email = email;
       await updatedUser.save()
-      return res.json("User info updated on server").status(200);
+      // return res.json("User info updated on server").status(200);
+      return res.json({id: updatedUser.id, userName: updatedUser.userName, email: updatedUser.email, avatar: updatedUser.avatar }).status(200);
     }
   } catch (error) {
     console.log(error)
