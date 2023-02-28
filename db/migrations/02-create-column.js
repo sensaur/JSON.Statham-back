@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true
       },
       columnTitle: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       order: {
         type: Sequelize.INTEGER

@@ -10,10 +10,10 @@ module.exports = {
         primaryKey: true
       },
       taskTitle: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       taskDescription: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       order: {
         type: Sequelize.INTEGER
